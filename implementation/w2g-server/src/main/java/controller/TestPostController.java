@@ -1,6 +1,8 @@
 package controller;
 
+import domain.UserRepository;
 import model.UserForm;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,9 +13,12 @@ import javax.validation.Valid;
 @Controller
 public class TestPostController {
 
+    @Autowired
+    private UserRepository userRepository;
+
     @GetMapping("/testpost")
     public String testIt(UserForm userForm) {
-//        model.addAttribute("user", new User());
+        System.out.println(userRepository.findAll());
         return "testpost";
     }
 
