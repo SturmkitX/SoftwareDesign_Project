@@ -1,5 +1,19 @@
 var stompClient = null;
 
+//var vid = $("#myAudio");
+// alert(vid == null);
+//vid.onpause = function() {
+//    $("#playStatus").html("Playing");
+//    stompClient.send("/app/hello", {}, JSON.stringify({'name': 'audioPaused'}));
+//};
+
+function pauseThatShit() {
+    $("#playStatus").html("Paused");
+    stompClient.send("/app/hello", {}, JSON.stringify({'name': 'audioPaused'}));
+    // $("#myAudio").play();
+    // document.getElementById("myAudio").pause();
+}
+
 function setConnected(connected) {
     $("#connect").prop("disabled", connected);
     $("#disconnect").prop("disabled", !connected);
@@ -37,7 +51,13 @@ function sendName() {
 }
 
 function showGreeting(message) {
-    $("#greetings").append("<tr><td>" + message + "</td></tr>");
+    // $("#greetings").append("<tr><td>" + message + "</td></tr>");
+    // alert(message);
+    if(message.localeCompare("audioPaused") == 0) {
+        document.getElementById("myAudio").pause();
+    } else {
+        $("#greetings").append("<tr><td>" + message + "</td></tr>");
+    }
 }
 
 $(function () {
@@ -47,4 +67,5 @@ $(function () {
     $( "#connect" ).click(function() { connect(); });
     $( "#disconnect" ).click(function() { disconnect(); });
     $( "#send" ).click(function() { sendName(); });
+    $( "#forcePause" ).click(function() { pauseThatShit(); });
 });
