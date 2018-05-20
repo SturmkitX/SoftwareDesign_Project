@@ -74,7 +74,7 @@
         <th>Authors</th>
         <th>Songs</th>
     </tr>
-    <tr th:each="album : ${allAlbums}">
+    <tr th:each="album : ${allAlbums}" th:onclick="'updateAlbumFields(' + ${album.id} + ', \'' + ${album.title} + '\', \'' + ${album.authors} + '\');'">
         <td> <img th:src="${album.coverPath}" width="100" height="100"/> </td>
         <td th:text="${album.id}">Album ID</td>
         <td th:text="${album.title}">Album title</td>
@@ -86,7 +86,7 @@
                     <th>ID</th>
                     <th>Title</th>
                 </tr>
-                <tr th:each="song : ${album.songs}" th:onclick="'updateFields(' + ${song.id} + ', \'' + ${song.title} + '\', ' + ${song.duration} + ');'">
+                <tr th:each="song : ${album.songs}" th:onclick="'updateMediaFields(' + ${song.id} + ', \'' + ${song.title} + '\', ' + ${song.duration} + ');'">
                     <td th:text="${song.id}"></td>
                     <td th:text="${song.title}"></td>
                 </tr>
@@ -103,6 +103,15 @@
     <input type="text" th:field="${miniMedia.duration}" placeholder="Media duration" />
     <input type="submit" name="updatemedia" value="Update media" />
     <input type="submit" name="deletemedia" value="Delete media" />
+</form>
+
+<br/><br/>
+<form action="#" th:action="@{/mediaupload}" method="post" id="albumUpdate" th:object="${miniAlbum}">
+    <input type="text" th:field="${miniAlbum.id}" placeholder="Album ID" />
+    <input type="text" th:field="${miniAlbum.title}" placeholder="Album Title" />
+    <input type="text" th:field="${miniAlbum.authors}" placeholder="Album authors" />
+    <input type="submit" name="updatealbum" value="Update album" />
+    <input type="submit" name="deletealbum" value="Delete album" />
 </form>
 </body>
 </html>

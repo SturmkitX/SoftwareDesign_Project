@@ -101,7 +101,48 @@ public class MediaUploadController {
             a.getSongs().remove(found);
             albumRepository.save(a);
         }
+        found.setAlbums(new LinkedHashSet<>());
         mediaRepository.delete(found);
+        return "redirect:/mediaupload";
+    }
+
+    @PostMapping(value = "/mediaupload", params = "updatealbum")
+    public String albumUpdate(@Valid MiniAlbumForm miniAlbumForm, BindingResult bindingResult, Model model) {
+        if(bindingResult.hasErrors()) {
+            System.out.println(bindingResult.getAllErrors());
+            model.addAttribute("status", "Invalid media parameters");
+            model.addAttribute("mediaForm", new MediaForm());
+            model.addAttribute("albumForm", new AlbumForm());
+            model.addAttribute("miniMedia", new MiniMediaForm());
+            model.addAttribute("miniAlbum", new MiniAlbumForm());
+
+            List<Album> albums = albumRepository.findAll();
+            model.addAttribute("allAlbums", albums);
+            return "mediaUpload";
+        }
+
+        Album found = albumRepository.findById(miniAlbumForm.getId()).get();
+        found = found.setTitle(miniAlbumForm.getTitle()).setAuthors(miniAlbumForm.getAuthors());
+        albumRepository.save(found);
+        return "redirect:/mediaupload";
+    }
+
+    @PostMapping(value = "/mediaupload", params = "deletealbum")
+    public String albumDelete(@Valid MiniAlbumForm miniAlbumForm, BindingResult bindingResult, Model model) {
+        if(bindingResult.hasErrors()) {
+            System.out.println(bindingResult.getAllErrors());
+            model.addAttribute("status", "Invalid media parameters");
+            model.addAttribute("mediaForm", new MediaForm());
+            model.addAttribute("albumForm", new AlbumForm());
+            model.addAttribute("miniMedia", new MiniMediaForm());
+            model.addAttribute("miniAlbum", new MiniAlbumForm());
+
+            List<Album> albums = albumRepository.findAll();
+            model.addAttribute("allAlbums", albums);
+            return "mediaUpload";
+        }
+
+        albumRepository.deleteById(miniAlbumForm.getId());
         return "redirect:/mediaupload";
     }
 
