@@ -27,6 +27,9 @@ public class Media {
     public Media() {
     }
 
+    /*
+    Getters for the view
+     */
     public int getId() {
         return id;
     }
@@ -46,5 +49,34 @@ public class Media {
     public int getDuration() {
         return duration;
     }
+
+    /*
+    Builder setters for faster building of objects
+     */
+    public Media setId(int id) {
+        this.id = id;
+        return this;
+    }
+
+    public Media setPath(String path) {
+        this.path = path;
+        return this;
+    }
+
+    public Media setTitle(String title) {
+        this.title = title;
+        return this;
+    }
+
+    public Media setAlbums(Set<Album> albums) {
+        this.albums = albums;
+        return this;
+    }
+
+    public Media setDuration(int duration) {
+        this.duration = duration;
+        return this;
+    }
+
 
 }

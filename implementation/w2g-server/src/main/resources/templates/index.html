@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <title>Hello WebSocket</title>
     <link href="/webjars/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -13,6 +14,10 @@
 <noscript><h2 style="color: #ff0000">Seems your browser doesn't support Javascript! Websocket relies on Javascript being
     enabled. Please enable
     Javascript and reload this page!</h2></noscript>
+<th:script>
+    roomId = ${roomId};
+    alert(roomId);
+</th:script>
 <div id="main-content" class="container">
     <div class="row">
         <div class="col-md-6">
@@ -49,14 +54,18 @@
         </div>
     </div>
 
-    <audio id="myAudio" controls>
+    <audio id="myAudio" controls onpause="pauseAudio()" onplay="playAudio()" onseeked="seekAudio()">
         <source src="/song.mp3" type="audio/mpeg">
         Your browser does not support the audio element.
     </audio>
 
     <h2 id="playStatus" ></h2>
 
-    <button type="button" id="forcePause">Pause audio</button>
+    <table>
+        <tr th:each="media : ${mediaList}">
+            <td th:text="${media.title}" th:onclick="'changeAudio(\'' + ${media.path} + '\');'">Title</td>
+        </tr>
+    </table>
 
 </div>
 </body>

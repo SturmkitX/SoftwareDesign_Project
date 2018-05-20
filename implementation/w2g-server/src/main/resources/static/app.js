@@ -1,17 +1,44 @@
 var stompClient = null;
+var isRemote = false;
+var roomId = null;
 
-//var vid = $("#myAudio");
-// alert(vid == null);
-//vid.onpause = function() {
-//    $("#playStatus").html("Playing");
-//    stompClient.send("/app/hello", {}, JSON.stringify({'name': 'audioPaused'}));
-//};
 
-function pauseThatShit() {
+function pauseAudio() {
     $("#playStatus").html("Paused");
-    stompClient.send("/app/hello", {}, JSON.stringify({'name': 'audioPaused'}));
-    // $("#myAudio").play();
-    // document.getElementById("myAudio").pause();
+    if(isRemote == false) {
+        stompClient.send("/app/hello", {}, JSON.stringify({'head': 'audioPaused', 'time': myAudio.currentTime, 'source': null}));
+    } else {
+        isRemote = false;
+    }
+}
+
+function playAudio() {
+    $("#playStatus").html("Playing");
+
+    if(isRemote == false) {
+        stompClient.send("/app/hello", {}, JSON.stringify({'head': 'audioPlayed', 'time': myAudio.currentTime, 'source': null}));
+    } else {
+        isRemote = false;
+    }
+
+}
+
+function seekAudio() {
+    $("#playStatus").html("Seeked");
+    if(isRemote == false) {
+        stompClient.send("/app/hello", {}, JSON.stringify({'head': 'audioSeeked', 'time': myAudio.currentTime, 'source': null}));
+    } else {
+        isRemote = false;
+    }
+}
+
+function changeAudio(newPath) {
+    $("#playStatus").html("Changed");
+    if(isRemote == false) {
+        stompClient.send("/app/hello", {}, JSON.stringify({'head': 'audioChanged', 'time': 0.0, 'source': newPath}));
+    } else {
+        isRemote = false;
+    }
 }
 
 function setConnected(connected) {
@@ -33,7 +60,8 @@ function connect() {
         setConnected(true);
         console.log('Connected: ' + frame);
         stompClient.subscribe('/topic/greetings', function (greeting) {
-            showGreeting(JSON.parse(greeting.body).content);
+            isRemote = true;
+            showGreeting(JSON.parse(greeting.body));
         });
     });
 }
@@ -51,10 +79,19 @@ function sendName() {
 }
 
 function showGreeting(message) {
-    // $("#greetings").append("<tr><td>" + message + "</td></tr>");
-    // alert(message);
-    if(message.localeCompare("audioPaused") == 0) {
-        document.getElementById("myAudio").pause();
+    var myAudio = document.getElementById("myAudio");
+    if(message.head.localeCompare("audioPaused") == 0) {
+        myAudio.currentTime = message.time;
+        myAudio.pause();
+    } else if(message.head.localeCompare("audioPlayed") == 0) {
+        myAudio.currentTime = message.time;
+        myAudio.play();
+    } else if(message.head.localeCompare("audioSeeked") == 0) {
+        myAudio.currentTime = message.time;
+    } else if(message.head.localeCompare("audioChanged") == 0) {
+        myAudio.src = message.source;
+        myAudio.currentTime = message.time;
+        myAudio.play();
     } else {
         $("#greetings").append("<tr><td>" + message + "</td></tr>");
     }
@@ -67,5 +104,4 @@ $(function () {
     $( "#connect" ).click(function() { connect(); });
     $( "#disconnect" ).click(function() { disconnect(); });
     $( "#send" ).click(function() { sendName(); });
-    $( "#forcePause" ).click(function() { pauseThatShit(); });
 });

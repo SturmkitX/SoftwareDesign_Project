@@ -14,6 +14,9 @@ public class Album {
     private int id;
 
     @NotNull
+    private String title;
+
+    @NotNull
     @ManyToOne(cascade = { CascadeType.ALL }, targetEntity = User.class)
     private User author;
 
@@ -29,6 +32,10 @@ public class Album {
 
     public int getId() {
         return id;
+    }
+
+    public String getTitle() {
+        return title;
     }
 
     public User getAuthor() {

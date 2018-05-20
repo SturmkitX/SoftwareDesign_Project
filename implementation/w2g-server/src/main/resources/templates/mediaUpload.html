@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<body>
+<form action="#" th:action="@{/mediaResult}" th:object="${mediaForm}" method="post" enctype="multipart/form-data">
+    <table>
+        <tr>
+            <td>ID:</td>
+            <td><input type="text" th:field="*{id}" /></td>
+            <td th:if="${#fields.hasErrors('id')}" th:errors="*{id}">ID Error</td>
+        </tr>
+        <tr>
+            <td>Title:</td>
+            <td><input type="text" th:field="*{title}" /></td>
+            <td th:if="${#fields.hasErrors('title')}" th:errors="*{title}">Title Error</td>
+        </tr>
+        <tr>
+            <td>Albums:</td>
+            <td><input type="text" th:field="*{albums}" /></td>
+            <td th:if="${#fields.hasErrors('albums')}" th:errors="*{albums}">Albums Error</td>
+        </tr>
+        <tr>
+            <td>Duration:</td>
+            <td><input type="text" th:field="*{duration}" /></td>
+            <td th:if="${#fields.hasErrors('duration')}" th:errors="*{duration}">Duration Error</td>
+        </tr>
+        <tr>
+            <td>File:</td>
+            <td><input type="file" th:field="*{upFile}"  /></td>
+            <td th:if="${#fields.hasErrors('upFile')}" th:errors="*{upFile}">File Error</td>
+        </tr>
+        <tr>
+            <td><button type="submit">Submit</button></td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>

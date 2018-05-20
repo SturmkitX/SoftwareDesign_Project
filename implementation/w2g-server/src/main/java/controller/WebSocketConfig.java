@@ -12,7 +12,10 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
 
     @Override
     public void configureMessageBroker(MessageBrokerRegistry config) {
+        /* queue prefix for SUBSCRIPTION (FROM server to CLIENT)  */
         config.enableSimpleBroker("/topic");
+
+        /* queue prefix for SENDING messages (FROM client TO server) */
         config.setApplicationDestinationPrefixes("/app");
         System.out.println("Am configurat acest Broker");
     }
