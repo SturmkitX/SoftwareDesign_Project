@@ -27,7 +27,6 @@ public class TestPostController {
         System.out.println(userForm);
 
         if(bindingResult.hasErrors()) {
-            userForm.setStatus("There is an issue here");
             return "redirect:/testpost";
         }
 

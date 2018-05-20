@@ -30,6 +30,8 @@ public class MediaUploadController {
     public String testIt(Model model) {
         model.addAttribute("mediaForm", new MediaForm());
         model.addAttribute("albumForm", new AlbumForm());
+        model.addAttribute("miniMedia", new MiniMediaForm());
+        model.addAttribute("miniAlbum", new MiniAlbumForm());
 
         List<Album> albums = albumRepository.findAll();
 //        System.out.println(albums.get(0).getSongs().size());
@@ -37,32 +39,89 @@ public class MediaUploadController {
         return "mediaUpload";
     }
 
-    @PostMapping("/mediauploadresult")
+    @PostMapping(value = "/mediaupload", params = "uploadmedia")
     public String mediaResult(@Valid MediaForm mediaForm, BindingResult bindingResult, Model model) {
         System.out.println(mediaForm);
-        processMediaForm(mediaForm);
 
         if(bindingResult.hasErrors()) {
             model.addAttribute("status", "Failed to upload media");
-        } else {
-            model.addAttribute("status", "OK");
+            model.addAttribute("mediaForm", new MediaForm());
+            model.addAttribute("albumForm", new AlbumForm());
+            model.addAttribute("miniMedia", new MiniMediaForm());
+            model.addAttribute("miniAlbum", new MiniAlbumForm());
+
+            List<Album> albums = albumRepository.findAll();
+            model.addAttribute("allAlbums", albums);
+            return "mediaUpload";
         }
 
-        return "mediaUploadResult";
+        processMediaForm(mediaForm);
+        return "redirect:/mediaupload";
     }
 
-    @PostMapping("/albumuploadresult")
-    public String albumResult(@Valid AlbumForm albumForm, BindingResult bindingResult, Model model) {
-        System.out.println(albumForm);
-        processAlbumForm(albumForm);
-
+    @PostMapping(value = "/mediaupload", params = "updatemedia")
+    public String mediaUpdate(@Valid MiniMediaForm miniMediaForm, BindingResult bindingResult, Model model) {
         if(bindingResult.hasErrors()) {
-            model.addAttribute("status", "Failed to upload album");
-        } else {
-            model.addAttribute("status", "OK");
+            System.out.println(bindingResult.getAllErrors());
+            model.addAttribute("status", "Invalid media parameters");
+            model.addAttribute("mediaForm", new MediaForm());
+            model.addAttribute("albumForm", new AlbumForm());
+            model.addAttribute("miniMedia", new MiniMediaForm());
+            model.addAttribute("miniAlbum", new MiniAlbumForm());
+
+            List<Album> albums = albumRepository.findAll();
+            model.addAttribute("allAlbums", albums);
+            return "mediaUpload";
         }
 
-        return "mediaUploadResult";
+        Media found = mediaRepository.findById(miniMediaForm.getId()).get();
+        found = found.setTitle(miniMediaForm.getTitle()).setDuration(miniMediaForm.getDuration());
+        mediaRepository.save(found);
+        return "redirect:/mediaupload";
+    }
+
+    @PostMapping(value = "/mediaupload", params = "deletemedia")
+    public String mediaDelete(@Valid MiniMediaForm miniMediaForm, BindingResult bindingResult, Model model) {
+        if(bindingResult.hasErrors()) {
+            System.out.println(bindingResult.getAllErrors());
+            model.addAttribute("status", "Invalid media parameters");
+            model.addAttribute("mediaForm", new MediaForm());
+            model.addAttribute("albumForm", new AlbumForm());
+            model.addAttribute("miniMedia", new MiniMediaForm());
+            model.addAttribute("miniAlbum", new MiniAlbumForm());
+
+            List<Album> albums = albumRepository.findAll();
+            model.addAttribute("allAlbums", albums);
+            return "mediaUpload";
+        }
+
+        // update database
+        Media found = mediaRepository.findById(miniMediaForm.getId()).get();
+        for(Album a : found.getAlbums()) {
+            a.getSongs().remove(found);
+            albumRepository.save(a);
+        }
+        mediaRepository.delete(found);
+        return "redirect:/mediaupload";
+    }
+
+    @PostMapping(value = "/mediaupload", params = "uploadalbum")
+    public String albumResult(@Valid AlbumForm albumForm, BindingResult bindingResult, Model model) {
+        System.out.println(albumForm);
+        if(bindingResult.hasErrors()) {
+            model.addAttribute("status", "Failed to upload album");
+            model.addAttribute("mediaForm", new MediaForm());
+            model.addAttribute("albumForm", new AlbumForm());
+            model.addAttribute("miniMedia", new MiniMediaForm());
+            model.addAttribute("miniAlbum", new MiniAlbumForm());
+
+            List<Album> albums = albumRepository.findAll();
+            model.addAttribute("allAlbums", albums);
+            return "mediaUpload";
+        }
+
+        processAlbumForm(albumForm);
+        return "redirect:/mediaupload";
     }
 
     private void processMediaForm(MediaForm mediaForm) {

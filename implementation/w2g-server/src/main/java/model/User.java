@@ -2,7 +2,6 @@ package model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.Set;
 
 @Entity
 public class User {
@@ -22,11 +21,7 @@ public class User {
     private String email;
 
     @NotNull
-    private int role;   // can be either regular user, admin or singer
-
-    @NotNull
-    @ManyToMany(targetEntity = Album.class, cascade = { CascadeType.ALL })
-    private Set<Album> albums;
+    private int role;   // can be either regular user or admin
 
     public User() {
     }
@@ -51,7 +46,41 @@ public class User {
         return role;
     }
 
-    public Set<Album> getAlbums() {
-        return albums;
+    public User setId(int id) {
+        this.id = id;
+        return this;
+    }
+
+    public User setName(String name) {
+        this.name = name;
+        return this;
+    }
+
+    public User setPassword(String password) {
+        this.password = password;
+        return this;
+    }
+
+    public User setEmail(String email) {
+        this.email = email;
+        return this;
+    }
+
+    public User setRole(int role) {
+        this.role = role;
+        return this;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return id == user.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return 0;
     }
 }

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <script src="/admin.js"></script>
+</head>
+
+<body>
+<h1>Admin control panel</h1>
+
+<!-- Uploaded media table -->
+<table border="2" align="center">
+    <tr>
+        <th>ID</th>
+        <th>Username</th>
+        <th>Email</th>
+        <th>Password</th>
+        <th>Admin</th>
+    </tr>
+    <tr th:each="user : ${allUsers}" th:onclick="'updateFields(' + ${user.id} + ', \'' + ${user.name} + '\', \'' + ${user.email} + '\', \'' + ${user.password} + '\', ' +
+            ${user.role} + ');'">
+        <td th:text="${user.id}" >User ID</td>
+        <td th:text="${user.name}">User name</td>
+        <td th:text="${user.email}">User email</td>
+        <td th:text="${user.password}">User password</td>
+        <td th:text="${user.role}">User role</td>
+    </tr>
+</table>
+
+<br/><br/>
+
+<form action="#" th:action="@{/adminpanel}" th:object="${userForm}" method="post" id="adminUpdate">
+    <input type="text" th:field="${userForm.id}" placeholder="User ID" />
+    <input type="text" th:field="${userForm.username}" placeholder="User Name" />
+    <input type="text" th:field="${userForm.email}" placeholder="User Email" />
+    <input type="text" th:field="${userForm.password}" placeholder="User Password" />
+    <input type="text" th:field="${userForm.role}" placeholder="Admin" />
+    <input type="submit" name="updatebtn" value="Update user" />
+    <input type="submit" name="deletebtn" value="Delete user" />
+</form>
+
+</body>
+</html>

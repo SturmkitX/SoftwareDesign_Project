@@ -8,7 +8,6 @@ import javax.validation.constraints.NotNull;
 
 public class MediaForm {
 
-    @Min(1)
     private int id;
 
     @NotBlank

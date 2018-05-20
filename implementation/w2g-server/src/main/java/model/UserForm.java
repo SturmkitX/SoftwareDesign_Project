@@ -1,31 +1,36 @@
 package model;
 
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 public class UserForm {
 
-    @NotNull
-    @Min(1)
     private int id;
 
-    @NotNull
+    private int role;
+
+    @NotBlank
     private String username;
 
-    @NotNull
-    private String password;
+    @NotBlank
+    @Pattern(regexp = "\\S+@\\S+\\.\\S+")
+    private String email;
 
-    private String status;
+    @NotBlank
+    @Size(min = 8)
+    private String password;
 
     public UserForm() {
     }
 
-    public int getId() {
-        return id;
+    public String getEmail() {
+        return email;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public UserForm setEmail(String email) {
+        this.email = email;
+        return this;
     }
 
     public String getUsername() {
@@ -44,21 +49,27 @@ public class UserForm {
         this.password = password;
     }
 
-    public String getStatus() {
-        return status;
+    public int getId() {
+        return id;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getRole() {
+        return role;
+    }
+
+    public void setRole(int role) {
+        this.role = role;
     }
 
     @Override
     public String toString() {
         return "UserForm{" +
-                "id=" + id +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
-                ", status='" + status + '\'' +
                 '}';
     }
 }
