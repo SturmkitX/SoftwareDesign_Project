@@ -25,7 +25,7 @@ public class User {
     private int role;   // can be either regular user, admin or singer
 
     @NotNull
-    @OneToMany(targetEntity = Album.class, cascade = { CascadeType.ALL }, mappedBy = "author")
+    @ManyToMany(targetEntity = Album.class, cascade = { CascadeType.ALL })
     private Set<Album> albums;
 
     public User() {

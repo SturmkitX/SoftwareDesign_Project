@@ -6,7 +6,7 @@ var roomId = null;
 function pauseAudio() {
     $("#playStatus").html("Paused");
     if(isRemote == false) {
-        stompClient.send("/app/hello", {}, JSON.stringify({'head': 'audioPaused', 'time': myAudio.currentTime, 'source': null}));
+        stompClient.send("/app/hello/" + roomId, {}, JSON.stringify({'head': 'audioPaused', 'time': myAudio.currentTime, 'source': null}));
     } else {
         isRemote = false;
     }
@@ -16,7 +16,7 @@ function playAudio() {
     $("#playStatus").html("Playing");
 
     if(isRemote == false) {
-        stompClient.send("/app/hello", {}, JSON.stringify({'head': 'audioPlayed', 'time': myAudio.currentTime, 'source': null}));
+        stompClient.send("/app/hello/" + roomId, {}, JSON.stringify({'head': 'audioPlayed', 'time': myAudio.currentTime, 'source': null}));
     } else {
         isRemote = false;
     }
@@ -26,7 +26,7 @@ function playAudio() {
 function seekAudio() {
     $("#playStatus").html("Seeked");
     if(isRemote == false) {
-        stompClient.send("/app/hello", {}, JSON.stringify({'head': 'audioSeeked', 'time': myAudio.currentTime, 'source': null}));
+        stompClient.send("/app/hello/" + roomId, {}, JSON.stringify({'head': 'audioSeeked', 'time': myAudio.currentTime, 'source': null}));
     } else {
         isRemote = false;
     }
@@ -35,7 +35,7 @@ function seekAudio() {
 function changeAudio(newPath) {
     $("#playStatus").html("Changed");
     if(isRemote == false) {
-        stompClient.send("/app/hello", {}, JSON.stringify({'head': 'audioChanged', 'time': 0.0, 'source': newPath}));
+        stompClient.send("/app/hello/" + roomId, {}, JSON.stringify({'head': 'audioChanged', 'time': 0.0, 'source': newPath}));
     } else {
         isRemote = false;
     }
@@ -54,12 +54,13 @@ function setConnected(connected) {
 }
 
 function connect() {
+    // alert(roomId);
     var socket = new SockJS('/gs-guide-websocket');
     stompClient = Stomp.over(socket);
     stompClient.connect({}, function (frame) {
         setConnected(true);
         console.log('Connected: ' + frame);
-        stompClient.subscribe('/topic/greetings', function (greeting) {
+        stompClient.subscribe('/topic/greetings/' + roomId, function (greeting) {
             isRemote = true;
             showGreeting(JSON.parse(greeting.body));
         });
@@ -72,10 +73,6 @@ function disconnect() {
     }
     setConnected(false);
     console.log("Disconnected");
-}
-
-function sendName() {
-    stompClient.send("/app/hello", {}, JSON.stringify({'name': $("#name").val()}));
 }
 
 function showGreeting(message) {

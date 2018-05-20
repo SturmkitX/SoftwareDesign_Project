@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+
+<h1>Create / Join Room</h1>
+<h2 th:if="${status} != null" th:text="${status}">Status</h2>
+
+<form method="POST" th:action="@{/createroom}">
+    <input type="text" name="roomId" placeholder="Enter Room ID here, or leave blank to create new room"/><br/>
+    <input type="submit" value="Submit" />
+</form>
+
+</body>
+</html>

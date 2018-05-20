@@ -22,7 +22,7 @@ public class GreetingController {
 
     @MessageMapping("/hello/{roomId}")
     @SendTo("/topic/greetings/{roomId}")
-    public Request greeting(Request message/*, @PathVariable String roomId*/) throws Exception {
+    public Request greeting(Request message) throws Exception {
         return message;
     }
 

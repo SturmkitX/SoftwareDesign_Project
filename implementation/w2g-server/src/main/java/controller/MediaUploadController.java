@@ -2,11 +2,10 @@ package controller;
 
 import domain.AlbumRepository;
 import domain.MediaRepository;
-import model.Album;
-import model.Media;
-import model.MediaForm;
+import model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,6 +14,7 @@ import javax.validation.Valid;
 import java.io.File;
 import java.io.IOException;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 
 @Controller
@@ -26,23 +26,43 @@ public class MediaUploadController {
     @Autowired
     private AlbumRepository albumRepository;
 
-    @GetMapping("/testmediaupload")
-    public String testIt(MediaForm mediaForm) {
-        // System.out.println(userRepository.findAll());
+    @GetMapping("/mediaupload")
+    public String testIt(Model model) {
+        model.addAttribute("mediaForm", new MediaForm());
+        model.addAttribute("albumForm", new AlbumForm());
+
+        List<Album> albums = albumRepository.findAll();
+//        System.out.println(albums.get(0).getSongs().size());
+        model.addAttribute("allAlbums", albums);
         return "mediaUpload";
     }
 
-    @PostMapping("/mediaResult")
-    public String mediaResult(@Valid MediaForm mediaForm, BindingResult bindingResult) {
+    @PostMapping("/mediauploadresult")
+    public String mediaResult(@Valid MediaForm mediaForm, BindingResult bindingResult, Model model) {
         System.out.println(mediaForm);
         processMediaForm(mediaForm);
 
         if(bindingResult.hasErrors()) {
-//            userForm.setStatus("There is an issue here");
-            return "testmediaupload";
+            model.addAttribute("status", "Failed to upload media");
+        } else {
+            model.addAttribute("status", "OK");
         }
 
-        return "mediaUploadStatus";
+        return "mediaUploadResult";
+    }
+
+    @PostMapping("/albumuploadresult")
+    public String albumResult(@Valid AlbumForm albumForm, BindingResult bindingResult, Model model) {
+        System.out.println(albumForm);
+        processAlbumForm(albumForm);
+
+        if(bindingResult.hasErrors()) {
+            model.addAttribute("status", "Failed to upload album");
+        } else {
+            model.addAttribute("status", "OK");
+        }
+
+        return "mediaUploadResult";
     }
 
     private void processMediaForm(MediaForm mediaForm) {
@@ -52,7 +72,7 @@ public class MediaUploadController {
         Set<Album> resultAlbum = new LinkedHashSet<>();
 
         // process albums
-        String[] albumString = mediaForm.getAlbums().split(";");
+        String[] albumString = mediaForm.getAlbums().split(",");
         for(String album : albumString) {
             final String trimmed = album.trim();
             Album found = albumRepository.findByTitle(trimmed);
@@ -75,5 +95,30 @@ public class MediaUploadController {
 
         res = res.setAlbums(resultAlbum).setPath("/media/" + filename);
         mediaRepository.save(res);
+
+        for(Album a : res.getAlbums()) {
+            a.getSongs().add(res);
+            albumRepository.save(a);
+        }
+    }
+
+    private void processAlbumForm(AlbumForm albumForm) {
+        // transform MediaForm into a media object
+        Album res = new Album().setId(albumForm.getId()).setTitle(albumForm.getTitle()).setSongs(new LinkedHashSet<>());
+
+        // get file extension
+        String extension = albumForm.getFile().getOriginalFilename().substring(albumForm.getFile().getOriginalFilename().lastIndexOf('.'));
+
+        // save location
+        String filename = String.format("%d_%s_%d%s", albumForm.getId(), albumForm.getTitle(), System.currentTimeMillis(), extension);
+        File dest = new File("/home/bogdan/SoftwareDesign_Project/cover/" + filename);
+        try {
+            albumForm.getFile().transferTo(dest);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        res = res.setAuthors(albumForm.getAuthors()).setCoverPath("/cover/" + filename);
+        albumRepository.save(res);
     }
 }

@@ -2,7 +2,6 @@ package model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -17,8 +16,7 @@ public class Album {
     private String title;
 
     @NotNull
-    @ManyToOne(cascade = { CascadeType.ALL }, targetEntity = User.class)
-    private User author;
+    private String authors;
 
     @NotNull
     @ManyToMany(targetEntity = Media.class, cascade = { CascadeType.ALL })
@@ -38,8 +36,8 @@ public class Album {
         return title;
     }
 
-    public User getAuthor() {
-        return author;
+    public String getAuthors() {
+        return authors;
     }
 
     public String getCoverPath() {
@@ -48,5 +46,30 @@ public class Album {
 
     public Set<Media> getSongs() {
         return songs;
+    }
+
+    public Album setId(int id) {
+        this.id = id;
+        return this;
+    }
+
+    public Album setTitle(String title) {
+        this.title = title;
+        return this;
+    }
+
+    public Album setAuthors(String authors) {
+        this.authors = authors;
+        return this;
+    }
+
+    public Album setSongs(Set<Media> songs) {
+        this.songs = songs;
+        return this;
+    }
+
+    public Album setCoverPath(String coverPath) {
+        this.coverPath = coverPath;
+        return this;
     }
 }
