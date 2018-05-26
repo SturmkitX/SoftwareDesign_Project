@@ -21,7 +21,10 @@ public class User {
     private String email;
 
     @NotNull
-    private int role;   // can be either regular user or admin
+    private String role;   // can be either regular user or admin
+
+    @NotNull
+    private boolean enabled;
 
     public User() {
     }
@@ -42,7 +45,7 @@ public class User {
         return email;
     }
 
-    public int getRole() {
+    public String getRole() {
         return role;
     }
 
@@ -66,8 +69,17 @@ public class User {
         return this;
     }
 
-    public User setRole(int role) {
+    public User setRole(String role) {
         this.role = role;
+        return this;
+    }
+
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public User setEnabled(boolean enabled) {
+        this.enabled = enabled;
         return this;
     }
 

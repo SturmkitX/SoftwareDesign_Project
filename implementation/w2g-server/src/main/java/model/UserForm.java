@@ -8,7 +8,7 @@ public class UserForm {
 
     private int id;
 
-    private int role;
+    private String role;
 
     @NotBlank
     private String username;
@@ -57,11 +57,11 @@ public class UserForm {
         this.id = id;
     }
 
-    public int getRole() {
+    public String getRole() {
         return role;
     }
 
-    public void setRole(int role) {
+    public void setRole(String role) {
         this.role = role;
     }
 
