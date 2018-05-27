@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: May 26, 2018 at 09:17 PM
+-- Generation Time: May 27, 2018 at 04:03 PM
 -- Server version: 10.1.31-MariaDB
 -- PHP Version: 7.2.3
 
@@ -59,7 +59,8 @@ CREATE TABLE `album_songs` (
 
 INSERT INTO `album_songs` (`album_id`, `songs_id`) VALUES
 (12, 14),
-(12, 15);
+(12, 15),
+(12, 18);
 
 -- --------------------------------------------------------
 
@@ -76,9 +77,9 @@ CREATE TABLE `hibernate_sequence` (
 --
 
 INSERT INTO `hibernate_sequence` (`next_val`) VALUES
-(18),
-(18),
-(18);
+(19),
+(19),
+(19);
 
 -- --------------------------------------------------------
 
@@ -99,7 +100,8 @@ CREATE TABLE `media` (
 
 INSERT INTO `media` (`id`, `duration`, `path`, `title`) VALUES
 (14, 100, '/media/0_Jackson_1526883205233.mp3', 'Jackson'),
-(15, 200, '/media/0_johan strauss_1526883374911.mp3', 'johan strauss');
+(15, 200, '/media/0_johan strauss_1526883374911.mp3', 'johan strauss'),
+(18, 200, '/media/0_Burning Inside_1527377575769.mp3', 'Burning Inside');
 
 -- --------------------------------------------------------
 
@@ -118,7 +120,8 @@ CREATE TABLE `media_albums` (
 
 INSERT INTO `media_albums` (`media_id`, `albums_id`) VALUES
 (14, 12),
-(15, 12);
+(15, 12),
+(18, 12);
 
 -- --------------------------------------------------------
 
@@ -140,7 +143,7 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `email`, `name`, `password`, `role`, `enabled`) VALUES
-(16, 'bogdi@secure.com', 'Bogdan Security', '$2a$10$K8ID6lF.3h2.BFbFVYJwbuG8SXw4uYmWMaVY.YpuOo/H0biWN5a/S', 'USER', 1),
+(16, 'bogdi@secure.com', 'Bogdan Security', '$2a$10$K8ID6lF.3h2.BFbFVYJwbuG8SXw4uYmWMaVY.YpuOo/H0biWN5a/S', 'ADMIN', 1),
 (17, 'abcd@abcd.com', 'abcd', '$2a$10$tqjSuVSGLUx4mZp8CqXb3.gWBvHMKzCnbNp67k2cSzpzs4kFYVR.i', 'USER', 1);
 
 --

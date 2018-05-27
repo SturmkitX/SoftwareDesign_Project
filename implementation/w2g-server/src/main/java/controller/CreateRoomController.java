@@ -1,5 +1,7 @@
 package controller;
 
+import model.PartyRoom;
+import model.PartyRoomForm;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

@@ -18,10 +18,10 @@
     roomId = /*[[${roomId}]]*/;
     connect();
 </script>
+<a href="/welcome">Back to main page</a><br/>
+
 <h1 th:if="${roomId} != null" th:text="'Room ID is : ' + ${roomId}">Room ID</h1>
 <div id="main-content" class="container">
-
-    <a href="/welcome">Back to main page</a><br/>
 
     <audio id="myAudio" controls onpause="pauseAudio()" onplay="playAudio()" onseeked="seekAudio()">
         <!--<source src="/song.mp3" type="audio/mpeg"> -->
