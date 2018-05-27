@@ -6,6 +6,7 @@
 </head>
 
 <body>
+<a href="/welcome">Back to main page</a>
 <h1>Admin control panel</h1>
 
 <!-- Uploaded media table -->
@@ -40,4 +41,10 @@
 </form>
 
 </body>
+
+<footer>
+    <form th:action="@{/logout}" method="post">
+        <input type="submit" value="Sign Out"/>
+    </form>
+</footer>
 </html>

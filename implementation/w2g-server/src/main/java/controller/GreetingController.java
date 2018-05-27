@@ -1,7 +1,7 @@
 package controller;
 
-import domain.MediaRepository;
-import model.Media;
+import domain.AlbumRepository;
+import model.Album;
 import model.Request;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
@@ -17,7 +17,7 @@ import java.util.List;
 public class GreetingController {
 
     @Autowired
-    MediaRepository mediaRepository;
+    AlbumRepository albumRepository;
 
 
     @MessageMapping("/hello/{roomId}")
@@ -28,9 +28,9 @@ public class GreetingController {
 
     @GetMapping("/testsocket/{roomId}")
     public String testSocket(Model model, @PathVariable String roomId) {
-        List<Media> media = mediaRepository.findAll();
-        System.out.println("Media size : " + media.size());
-        model.addAttribute("mediaList", media);
+        List<Album> albums = albumRepository.findAll();
+//        System.out.println("Media size : " + media.size());
+        model.addAttribute("allAlbums", albums);
         model.addAttribute("roomId", roomId);
 
         return "index";

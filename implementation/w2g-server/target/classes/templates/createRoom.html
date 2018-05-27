@@ -1,14 +1,36 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <body>
+<a href="/welcome">Back to main page</a>
 
 <h1>Create / Join Room</h1>
 <h2 th:if="${status} != null" th:text="${status}">Status</h2>
 
-<form method="POST" th:action="@{/createroom}">
-    <input type="text" name="roomId" placeholder="Enter Room ID here, or leave blank to create new room"/><br/>
+<form method="POST" th:action="@{/createroom}" th:object="${roomForm}">
+    <input type="text" name="roomId" th:field="*{id}" placeholder="Enter Room ID here, or leave blank to create new room"/><br/>
+    <input type="radio" name="roomscope" value="private" checked="checked" th:field="*{hidden}" >Private</input>
+    <input type="radio" name="roomscope" value="public" th:field="*{hidden}" >Public</input><br/>
+    <input type="text" name="roomname" th:field="*{name}" placeholder="Room name" />
     <input type="submit" value="Submit" />
 </form>
 
+<h2>Public rooms:</h2>
+<table align="center" border="2">
+    <tr>
+        <th>Room name</th>
+        <th>Room ID</th>
+    </tr>
+    <tr th:each="room : ${allRooms}">
+        <td th:text="${room.name}">Room name</td>
+        <td th:text="${room.id}">Room ID</td>
+    </tr>
+</table>
+
 </body>
+
+<footer>
+    <form th:action="@{/logout}" method="post">
+        <input type="submit" value="Sign Out"/>
+    </form>
+</footer>
 </html>

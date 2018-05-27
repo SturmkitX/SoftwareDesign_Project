@@ -18,17 +18,23 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                    .antMatchers("/register", "/registerstatus").permitAll()
-                    .antMatchers("/adminpanel").hasRole("ADMIN")
-                    .antMatchers("/", "/home").permitAll()
+                    .antMatchers("/register").permitAll()
+                    .antMatchers("/adminpanel", "/mediaupload", "/mediauploadstatus").hasAuthority("ADMIN")
+                        .anyRequest().authenticated()
+                    .antMatchers("/testsocket/**", "/welcome", "/createroom").hasAnyAuthority("ADMIN", "USER")
                         .anyRequest().authenticated()
                 .and()
                 .formLogin()
                     .loginPage("/login")
+                    .successForwardUrl("/welcome")
                     .permitAll()
                 .and()
                 .logout()
-                    .permitAll();
+                    .permitAll()
+        .and()
+        .rememberMe()
+        .and()
+        .csrf().disable();
     }
 
     @Autowired

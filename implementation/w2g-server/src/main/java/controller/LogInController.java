@@ -11,7 +11,6 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
 
@@ -21,6 +20,11 @@ public class LogInController {
     @Autowired
     private UserRepository userRepository;
 
+    @GetMapping("/")
+    public String index() {
+        return "redirect:/welcome";
+    }
+
     @GetMapping("/login")
     public String loginForm(Model model) {
         model.addAttribute("userForm", new UserForm());
@@ -28,25 +32,6 @@ public class LogInController {
         return "logIn";
     }
 
-//    @PostMapping("/loginstatus")
-//    public String loginCheck(@RequestParam(name = "email", defaultValue = "") String email,
-//                             @RequestParam(name = "password", defaultValue = "") String password, Model model) {
-//        System.out.println(String.format("Email : %s\tPassword : %s\n", email, password));
-//        if(email.equals("") || password.equals("")) {
-//            model.addAttribute("status", "Credentials validation error");
-//            return "logIn";
-//        }
-//
-//        // check if the user exists
-//        User user = userRepository.findByEmailAndPassword(email, password);
-//        if(user == null) {
-//            model.addAttribute("status", "Invalid credentials : User does not exist");
-//            return "logIn";
-//        }
-//
-//        return "redirect:/createroom";
-//    }
-//
     @GetMapping("/register")
     public String registerUser(Model model) {
         model.addAttribute("userForm", new UserForm());
@@ -54,7 +39,7 @@ public class LogInController {
         return "registerUser";
     }
 
-    @PostMapping("/registerstatus")
+    @PostMapping("/register")
     public String checkRegister(@Valid UserForm userForm, BindingResult bindingResult, Model model) {
         if(bindingResult.hasErrors()) {
             model.addAttribute("status", "Error validating fields!");
@@ -73,5 +58,15 @@ public class LogInController {
         userRepository.save(user);
 
         return "redirect:/login";
+    }
+
+    @GetMapping("/welcome")
+    public String welcomePageGet() {
+        return "welcome";
+    }
+
+    @PostMapping("/welcome")
+    public String welcomePage() {
+        return "welcome";
     }
 }

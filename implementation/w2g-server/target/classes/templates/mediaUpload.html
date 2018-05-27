@@ -7,6 +7,7 @@
 
 <body>
 <h3 th:if="${status} != null" th:text="${status}">Status report</h3>
+<a href="/welcome">Back to main page</a>
 
 <br/><br/>
 <h3>Media upload</h3><br/>
@@ -114,4 +115,10 @@
     <input type="submit" name="deletealbum" value="Delete album" />
 </form>
 </body>
+
+<footer>
+    <form th:action="@{/logout}" method="post">
+        <input type="submit" value="Sign Out"/>
+    </form>
+</footer>
 </html>

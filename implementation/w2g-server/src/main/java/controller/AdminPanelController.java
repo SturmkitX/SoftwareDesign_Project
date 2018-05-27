@@ -37,6 +37,10 @@ public class AdminPanelController {
             return "redirect:/adminpanel";
         }
 
+        if(!(userForm.getRole().equals("ADMIN")) || (userForm.getRole().equals("USER"))) {
+            return "redirect:/adminpanel";
+        }
+
         User user = new User().setId(userForm.getId()).setName(userForm.getUsername()).setEmail(userForm.getEmail()).setPassword(userForm.getPassword())
                 .setRole(userForm.getRole());
         userRepository.save(user);

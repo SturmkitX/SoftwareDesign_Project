@@ -16,57 +16,57 @@
     Javascript and reload this page!</h2></noscript>
 <script th:inline="javascript">
     roomId = /*[[${roomId}]]*/;
+    connect();
 </script>
+<a href="/welcome">Back to main page</a><br/>
+
 <h1 th:if="${roomId} != null" th:text="'Room ID is : ' + ${roomId}">Room ID</h1>
 <div id="main-content" class="container">
-    <div class="row">
-        <div class="col-md-6">
-            <form class="form-inline">
-                <div class="form-group">
-                    <label for="connect">WebSocket connection:</label>
-                    <button id="connect" class="btn btn-default" type="submit">Connect</button>
-                    <button id="disconnect" class="btn btn-default" type="submit" disabled="disabled">Disconnect
-                    </button>
-                </div>
-            </form>
-        </div>
-        <div class="col-md-6">
-            <form class="form-inline">
-                <div class="form-group">
-                    <label for="name">What is your name?</label>
-                    <input type="text" id="name" class="form-control" placeholder="Your name here...">
-                </div>
-                <button id="send" class="btn btn-default" type="submit">Send</button>
-            </form>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <table id="conversation" class="table table-striped">
-                <thead>
-                <tr>
-                    <th>Greetings</th>
-                </tr>
-                </thead>
-                <tbody id="greetings">
-                </tbody>
-            </table>
-        </div>
-    </div>
 
     <audio id="myAudio" controls onpause="pauseAudio()" onplay="playAudio()" onseeked="seekAudio()">
-        <source src="/song.mp3" type="audio/mpeg">
+        <!--<source src="/song.mp3" type="audio/mpeg"> -->
         Your browser does not support the audio element.
     </audio>
 
     <h2 id="playStatus" ></h2>
 
-    <table>
-        <tr th:each="media : ${mediaList}">
-            <td th:text="${media.title}" th:onclick="'changeAudio(\'' + ${media.path} + '\');'">Title</td>
+    <!-- Uploaded media table -->
+    <table border="2" align="center">
+        <tr>
+            <th>Cover</th>
+            <th>ID</th>
+            <th>Title</th>
+            <th>Authors</th>
+            <th>Songs</th>
+        </tr>
+        <tr th:each="album : ${allAlbums}">
+            <td> <img th:src="${album.coverPath}" width="100" height="100"/> </td>
+            <td th:text="${album.id}">Album ID</td>
+            <td th:text="${album.title}">Album title</td>
+            <td th:text="${album.authors}">Album authors</td>
+            <td>
+
+                <table border="1">
+                    <tr>
+                        <th>ID</th>
+                        <th>Title</th>
+                    </tr>
+                    <tr th:each="song : ${album.songs}" th:onclick="'changeAudio(\'' + ${song.path} + '\');'">
+                        <td th:text="${song.id}"></td>
+                        <td th:text="${song.title}"></td>
+                    </tr>
+                </table>
+
+            </td>
         </tr>
     </table>
 
 </div>
 </body>
+
+<footer>
+    <form th:action="@{/logout}" method="post">
+        <input type="submit" value="Sign Out"/>
+    </form>
+</footer>
 </html>
