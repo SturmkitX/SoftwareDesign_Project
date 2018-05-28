@@ -4,6 +4,8 @@ import domain.UserRepository;
 import model.User;
 import model.UserForm;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -41,7 +43,8 @@ public class AdminPanelController {
             return "redirect:/adminpanel";
         }
 
-        User user = new User().setId(userForm.getId()).setName(userForm.getUsername()).setEmail(userForm.getEmail()).setPassword(userForm.getPassword())
+        PasswordEncoder encoder = new BCryptPasswordEncoder();
+        User user = new User().setId(userForm.getId()).setName(userForm.getUsername()).setEmail(encoder.encode(userForm.getEmail())).setPassword(userForm.getPassword())
                 .setRole(userForm.getRole());
         userRepository.save(user);
         System.out.println(user);

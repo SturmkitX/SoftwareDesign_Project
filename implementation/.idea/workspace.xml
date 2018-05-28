@@ -2,17 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8117ac6d-679f-4cfa-9958-52950115fe73" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/../.~lock.Project_Analysis_and_Design_Document.odt#" beforeDir="false" afterPath="$PROJECT_DIR$/../.~lock.Project_Analysis_and_Design_Document.odt#" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Project_Analysis_and_Design_Document.odt" beforeDir="false" afterPath="$PROJECT_DIR$/../Project_Analysis_and_Design_Document.odt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../diagrams/class_server_gof.uxf" beforeDir="false" afterPath="$PROJECT_DIR$/../diagrams/class_server_gof.uxf" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/w2g-server/src/main/java/controller/CreateRoomController.java" beforeDir="false" afterPath="$PROJECT_DIR$/w2g-server/src/main/java/controller/CreateRoomController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/w2g-server/src/main/java/controller/PartyRoom.java" beforeDir="false" afterPath="$PROJECT_DIR$/w2g-server/src/main/java/model/PartyRoom.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/w2g-server/src/main/java/controller/PartyRoomForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/w2g-server/src/main/java/model/PartyRoomForm.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/w2g-server/src/test/java/ro/utcluj/bogdan/AppTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/w2g-server/target/classes/static/song.mp3" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/w2g-server/target/classes/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/w2g-server/target/classes/templates/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../watch2gether2.sql" beforeDir="false" afterPath="$PROJECT_DIR$/../watch2gether2.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/w2g-server/src/main/java/controller/AdminPanelController.java" beforeDir="false" afterPath="$PROJECT_DIR$/w2g-server/src/main/java/controller/AdminPanelController.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -51,20 +42,38 @@
       <file leaf-file-name="AdminPanelController.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/w2g-server/src/main/java/controller/AdminPanelController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="23" column="25" selection-start-line="23" selection-start-column="25" selection-end-line="23" selection-end-column="25" />
+            <state relative-caret-position="340">
+              <caret line="34" column="23" lean-forward="true" selection-start-line="34" selection-start-column="23" selection-end-line="34" selection-end-column="23" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CreateRoomController.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="User.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/w2g-server/src/main/java/model/User.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="374">
+              <caret line="54" column="5" lean-forward="true" selection-start-line="54" selection-start-column="5" selection-end-line="54" selection-end-column="5" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CreateRoomController.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/w2g-server/src/main/java/controller/CreateRoomController.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="374">
-              <caret line="22" column="31" lean-forward="true" selection-start-line="22" selection-start-column="31" selection-end-line="22" selection-end-column="31" />
+              <caret line="22" column="31" selection-start-line="22" selection-start-column="31" selection-end-line="22" selection-end-column="31" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="LogInController.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/w2g-server/src/main/java/controller/LogInController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="530">
+              <caret line="54" column="57" selection-start-line="54" selection-start-column="57" selection-end-line="54" selection-end-column="57" />
             </state>
           </provider>
         </entry>
@@ -180,8 +189,8 @@
         <option value="$PROJECT_DIR$/w2g-server/src/main/resources/templates/registerUser.html" />
         <option value="$PROJECT_DIR$/w2g-server/src/main/resources/templates/index.html" />
         <option value="$PROJECT_DIR$/w2g-server/src/main/java/domain/Repository.java" />
-        <option value="$PROJECT_DIR$/w2g-server/src/main/java/controller/AdminPanelController.java" />
         <option value="$PROJECT_DIR$/w2g-server/src/test/java/CredentialsTest.java" />
+        <option value="$PROJECT_DIR$/w2g-server/src/main/java/controller/AdminPanelController.java" />
       </list>
     </option>
   </component>
@@ -199,7 +208,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -224,6 +232,32 @@
               <item name="w2g-server" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Watch2Gether" type="b2602c69:ProjectViewProjectNode" />
+              <item name="implementation" type="462c0819:PsiDirectoryNode" />
+              <item name="w2g-server" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Watch2Gether" type="b2602c69:ProjectViewProjectNode" />
+              <item name="implementation" type="462c0819:PsiDirectoryNode" />
+              <item name="w2g-server" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="controller" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Watch2Gether" type="b2602c69:ProjectViewProjectNode" />
+              <item name="implementation" type="462c0819:PsiDirectoryNode" />
+              <item name="w2g-server" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="model" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="Watch2Gether" type="b2602c69:ProjectViewProjectNode" />
@@ -256,12 +290,13 @@
         </subPane>
       </pane>
       <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="AndroidView" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="last.edited.regexp" value="cacat@rusine." />
-    <property name="last_opened_file_path" value="$USER_HOME$/gs-messaging-stomp-websocket/complete" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
   <component name="RecentsManager">
@@ -288,7 +323,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.CredentialsTest">
+  <component name="RunManager" selected="Application.SpringBootStarter">
     <configuration name="SpringBootStarter" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="starter.SpringBootStarter" />
       <module name="w2gserver" />
@@ -364,8 +399,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.CredentialsTest" />
         <item itemvalue="Application.SpringBootStarter" />
+        <item itemvalue="JUnit.CredentialsTest" />
       </list>
     </recent_temporary>
   </component>
@@ -386,10 +421,12 @@
     <history-entry file="CredentialsTest - 2018.05.28 at 00h 51m 07s.xml">
       <configuration name="CredentialsTest" configurationId="JUnit" />
     </history-entry>
+    <history-entry file="CredentialsTest - 2018.05.28 at 15h 46m 13s.xml">
+      <configuration name="CredentialsTest" configurationId="JUnit" />
+    </history-entry>
   </component>
   <component name="ToolWindowManager">
     <frame x="-6" y="26" width="1932" height="1035" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -404,7 +441,7 @@
       <window_info anchor="bottom" id="Terminal" order="7" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Designer" order="2" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info id="UI Designer" order="2" />
@@ -531,13 +568,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/w2g-server/src/main/java/model/User.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="26" column="28" lean-forward="true" selection-start-line="26" selection-start-column="28" selection-end-line="26" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/w2g-server/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="850">
@@ -605,13 +635,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
           <caret line="8" lean-forward="true" selection-start-line="8" selection-end-line="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/w2g-server/src/main/java/controller/LogInController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="365">
-          <caret line="34" column="28" lean-forward="true" selection-start-line="34" selection-start-column="28" selection-end-line="34" selection-end-column="28" />
         </state>
       </provider>
     </entry>
@@ -684,13 +707,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/w2g-server/src/main/java/controller/AdminPanelController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="23" column="25" selection-start-line="23" selection-start-column="25" selection-end-line="23" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/w2g-server/src/main/java/model/UserForm.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="238">
@@ -702,25 +718,37 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="340">
           <caret line="20" column="16" selection-start-line="20" selection-start-column="16" selection-end-line="20" selection-end-column="16" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#211#212#0" expanded="true" />
-            <element signature="e#232#233#0" expanded="true" />
-            <element signature="e#443#444#0" expanded="true" />
-            <element signature="e#505#506#0" expanded="true" />
-            <element signature="e#607#608#0" expanded="true" />
-            <element signature="e#669#670#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/w2g-server/src/main/java/controller/CreateRoomController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="374">
-          <caret line="22" column="31" lean-forward="true" selection-start-line="22" selection-start-column="31" selection-end-line="22" selection-end-column="31" />
+          <caret line="22" column="31" selection-start-line="22" selection-start-column="31" selection-end-line="22" selection-end-column="31" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/w2g-server/src/main/java/controller/LogInController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="530">
+          <caret line="54" column="57" selection-start-line="54" selection-start-column="57" selection-end-line="54" selection-end-column="57" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/w2g-server/src/main/java/controller/AdminPanelController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="34" column="23" lean-forward="true" selection-start-line="34" selection-start-column="23" selection-end-line="34" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/w2g-server/src/main/java/model/User.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="54" column="5" lean-forward="true" selection-start-line="54" selection-start-column="5" selection-end-line="54" selection-end-column="5" />
         </state>
       </provider>
     </entry>
